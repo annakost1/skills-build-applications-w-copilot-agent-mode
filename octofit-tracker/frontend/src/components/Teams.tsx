@@ -1,11 +1,16 @@
 import { CapabilityCard } from './CapabilityCard.js';
+import { getJson } from '../api/client.js';
+
+export async function loadTeams() {
+  return getJson<Record<string, unknown>>('/api/teams');
+}
 
 export default function Teams() {
   return (
     <CapabilityCard
       title="Teams"
       description="Manage teams and members."
-      endpoint="/api/teams"
+      loadItems={loadTeams}
       itemsKey="teams"
       emptyText="No teams found."
       renderItem={(item) => {
